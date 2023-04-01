@@ -33,16 +33,145 @@ public class AccommodoApp {
         String recomendacao = quarto3.nome;
         int promocaoDaRecomendacao = quarto3.preco - (quarto3.preco * 3/10);
 
-        System.out.printf("Nosso hotel possui %d quartos, estamos com vagas e prontos para recebê-los!\n", numeroDeQuartos);
-        System.out.println("\nRecomendação do dia: " + recomendacao);
-        System.out.printf("Por apenas R$%d,00 (á vista).\n", promocaoDaRecomendacao);
+        // Criar do while para menu e pegar acao do usuario diferente de 0.
+        // *Implementar também um botão de voltar em cada opção.
+        // *Jogar informações num banco de dados, se possivel (opcional)
+        int acao = 1;
+
+        System.out.println("=== Hotel X - Controle de usuário ===");
+        System.out.println("---== Seu conforto nossa alegria ==---\n");
+        System.out.println("Qual ação gostaria de realizar?");
+        System.out.println("1 - Listar todos os quartos");
+        System.out.println("2 - Informações do hotel");
+        System.out.println("3 - Fazer reserva de um quarto");
+        System.out.println("4 - Feedback do quarto e hotel");
+        System.out.println("5 - Recomendação do dia");
+        System.out.println("0 - Sair");
         
-        for (Quarto quarto : quartos) {
-            if (quarto.disponivel == true) {
-                System.out.printf("\nO quarto %s, com numero %d está disponivel. \nSeu valor é de R$%d,00.\n",quarto.nome ,quarto.numero ,quarto.preco);
-            } else {
-                System.out.printf("\nO quarto %s está ocupado.\n", quarto.nome);
+        switch (acao) {
+            case 1:
+            for (Quarto quarto : quartos) {
+                if (quarto.disponivel == true) {
+                    System.out.printf("\nO quarto %s, com numero %d está disponivel. \nSeu valor é de R$%d,00.\n",quarto.nome ,quarto.numero ,quarto.preco);
+                } else {
+                    System.out.printf("\nO quarto %s está ocupado.\n", quarto.nome);
+                }
             }
+            break;
+            case 2:
+                System.out.printf("\nNosso hotel possui %d quartos, estamos com vagas e prontos para recebê-los!\n", numeroDeQuartos);
+                break;
+            case 3:
+                int reservarQuarto = 0;
+                System.out.println("\nQual quarto gostaria de reservar:");
+                for(int i = 0; i < numeroDeQuartos; i++) {
+                    if (quartos[i].disponivel == true) {
+                        System.out.println((i + 1) + " - " + quartos[i].nome + " n° " + quartos[i].numero);
+                    }
+                }
+
+                // obter quarto que será reservado aqui, na variavel reservarQuarto
+                // criar logica para saber qual quarto escolheu e mudar disponivel para false
+                break;
+            case 4:
+                int acaoFeedback = 2;
+                System.out.println("\nOnde deseja deixar o feedback:");
+                System.out.println("1 - Hotel");
+                System.out.println("2 - Quarto");
+                switch (acaoFeedback) {
+                    case 1:
+                        String cometarioQuarto = "";
+                        int ratingHotel = 0;
+                        int acaoRatingHotel = 4;
+                        System.out.println("\nQuantas estrelas você deixará para nosso Hotel:");
+                        System.out.println("0 - Realmente não gostei");
+                        System.out.println("1 - Não é meu tipo");
+                        System.out.println("2 - Poderia melhorar em algumas coisas");
+                        System.out.println("3 - Razoável");
+                        System.out.println("4 - Gostei bastante");
+                        System.out.println("5 - Amei! Experiencia incrivel!");
+
+                        switch (acaoRatingHotel) {
+                            case 0:
+                                ratingHotel = 0;
+                                break;
+                            case 1:
+                                ratingHotel = 1;
+                                break;
+                            case 2:
+                                ratingHotel = 2;
+                                break;
+                            case 3:
+                                ratingHotel = 3;
+                                break;
+                            case 4:
+                                ratingHotel = 4;
+                                break;
+                            case 5:
+                                ratingHotel = 5;
+                                break;
+                            default:
+                                System.out.println("\nPor favor informe um numero de 0 a 5.");
+                                break;
+                        }
+                    
+                        System.out.println("\nDeixe seu comentário para o hotel aqui:");
+                        // obter comentário aqui e colocar na variavel cometarioQuarto
+
+                        break;
+
+                        case 2:
+                        int ratingQuarto = 0;
+                        int acaoRatingQuarto = 4;
+                        System.out.println("\nQuantas estrelas você deixará para nosso quarto:");
+                        System.out.println("0 - Realmente não gostei");
+                        System.out.println("1 - Não é meu tipo");
+                        System.out.println("2 - Poderia melhorar em algumas coisas");
+                        System.out.println("3 - Razoável");
+                        System.out.println("4 - Gostei bastante");
+                        System.out.println("5 - Amei! Experiencia incrivel!");
+
+                        switch (acaoRatingQuarto) {
+                            case 0:
+                                ratingQuarto = 0;
+                                break;
+                            case 1:
+                                ratingQuarto = 1;
+                                break;
+                            case 2:
+                                ratingQuarto = 2;
+                                break;
+                            case 3:
+                                ratingQuarto = 3;
+                                break;
+                            case 4:
+                                ratingQuarto = 4;
+                                break;
+                            case 5:
+                                ratingQuarto = 5;
+                                break;
+                            default:
+                                System.out.println("\nPor favor informe um numero de 0 a 5.");
+                                break;
+                        }
+                    
+                        System.out.println("\nDeixe seu comentário para o quarto aqui:");
+                        // obter comentário aqui
+
+                        break;
+
+                
+                    default:
+                        System.out.println("\nPor favor insira uma das opções acima.");
+                        break;
+                }
+                break;
+            case 5:
+                System.out.println("\nRecomendação do dia: " + recomendacao);
+                System.out.printf("Por apenas R$%d,00 (á vista).\n", promocaoDaRecomendacao);
+                break;
+            default:
+                break;
         }
         
     }
