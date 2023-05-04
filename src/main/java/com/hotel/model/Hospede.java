@@ -1,3 +1,5 @@
+package src.main.java.com.hotel.model;
+
 public class Hospede {
   private String nome;
   private String email;

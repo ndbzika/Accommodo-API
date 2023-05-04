@@ -1,3 +1,5 @@
+package src.main.java.com.hotel.model;
+
 public class Quarto {
     private String nome;
     private int numero;

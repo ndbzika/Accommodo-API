@@ -1,0 +1,85 @@
+@startuml
+class Hotel {
+  -nome: String
+  -endereco: String
+  -quartos: List<Quarto>
+  -funcionarios: List<Funcionario>
+  -servicos: List<Servico>
+  +adicionarQuarto(quarto: Quarto): boolean
+  +removerQuarto(quarto: Quarto): boolean
+  +adicionarFuncionario(funcionario: Funcionario): boolean
+  +removerFuncionario(funcionario: Funcionario): boolean
+  +adicionarServico(servico: Servico): boolean
+  +removerServico(servico: Servico): boolean
+  +buscarQuartosDisponiveis(dataCheckIn: Date, dataCheckOut: Date): List<Quarto>
+  +registrarReserva(reserva: Reserva): boolean
+  +cancelarReserva(reserva: Reserva): boolean
+  +registrarCheckin(reserva: Reserva): boolean
+  +registrarCheckout(reserva: Reserva): boolean
+}
+
+class Quarto {
+  -nome: String
+  -numero: int
+  -tipo: String
+  -andar: int
+  -capacidade: int
+  -precoDiaria: double
+  -disponivel: boolean
+  +getNome(): String
+  +getNumero(): int
+  +getTipo(): String
+  +getCapacidade(): int
+  +getPrecoDiaria(): double
+  +isDisponivel(): boolean
+}
+
+class Reserva {
+  -id: int
+  -hospede: Hospede
+  -quarto: Quarto
+  -dataCheckIn: Date
+  -dataCheckOut: Date
+  +getId(): int
+  +getHospede(): Hospede
+  +getQuarto(): Quarto
+  +getDataCheckIn(): Date
+  +getDataCheckOut(): Date
+}
+
+class Hospede {
+  -nome: String
+  -email: String
+  -telefone: String
+  -documento:
+}
+
+class Funcionario {
+  -nome: String
+  -cargo: String
+  -salario: double
+  -email: String
+  -telefone: String
+  +getNome(): String
+  +getCargo(): String
+  +getSalario(): double
+  +getEmail(): String
+  +getTelefone(): String
+}
+
+class Servico {
+  -nome: String
+  -descricao: String
+  -preco: double
+  +getNome(): String
+  +getDescricao(): String
+  +getPreco(): double
+}
+
+Hotel -> Quarto
+Hotel -> Funcionario
+Hotel -> Servico
+Hotel -> Reserva
+Reserva -> Hospede
+Reserva -> Quarto
+@enduml

@@ -1,3 +1,5 @@
+package src.main.java.com.hotel.model;
+
 public class Servico {
     private String nome;
     private String descricao;

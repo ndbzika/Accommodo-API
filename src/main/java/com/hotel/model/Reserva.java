@@ -1,3 +1,5 @@
+package src.main.java.com.hotel.model;
+
 import java.util.Date;
 
 public class Reserva {

@@ -1,3 +1,7 @@
+package src.main.java.com.accommodoapp;
+
+import src.main.java.com.hotel.model.*;
+
 import java.io.IOException;
 import java.util.Date;
 import java.util.Scanner;
