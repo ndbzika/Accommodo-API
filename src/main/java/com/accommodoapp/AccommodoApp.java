@@ -1,8 +1,8 @@
 package src.main.java.com.accommodoapp;
 
+import src.main.java.com.hotel.enums.TiposQuarto;
 import src.main.java.com.hotel.model.*;
 
-import java.io.IOException;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -50,16 +50,30 @@ public class AccommodoApp {
             switch (acao) {
                 case 1:
                     System.out.print("Nome do quarto: ");
-                    String nomeDoQuarto = leitor.nextLine();
+                    String nomeQuarto = leitor.nextLine();
 
-                    System.out.print("Tipo do quarto: ");
-                    String tipoDoQuarto = leitor.nextLine();
+                    System.out.print("Numero do quarto: ");
+                    int numeroQuarto = leitor.nextInt();
+                    leitor.nextLine();
+
+                    System.out.print("Andar do quarto: ");
+                    int andarQuarto = leitor.nextInt();
+                    leitor.nextLine();
+
+                    System.out.print("Tipo do quarto(INDIVIDUAL, DUPLO_INDIVIDUAL, DUPLO ,CASAL, TRIPLO, QUADRUPLO): ");
+                    String tipoQuarto = leitor.nextLine();
+
+                    System.out.print("Capacidade do quarto: ");
+                    int capacidadeQuarto = leitor.nextInt();
+                    leitor.nextLine();
 
                     System.out.print("Preço da diaria: ");
                     int precoDiaria = leitor.nextInt();
                     leitor.nextLine();
 
-                    Quarto quarto = new Quarto(nomeDoQuarto,tipoDoQuarto,precoDiaria);
+
+
+                    Quarto quarto = new Quarto(nomeQuarto, numeroQuarto, andarQuarto,TiposQuarto.valueOf(tipoQuarto.toUpperCase()), capacidadeQuarto,precoDiaria);
                     hotel1.adicionarQuarto(quarto);
                 case 2:
                     Date dataHoje = new Date();
@@ -105,6 +119,11 @@ public class AccommodoApp {
                     }
                     break;
                 case 6:
+                    System.out.println("1 - Funcionário normal");
+                    System.out.println("2 - Gerente");
+                    int tipoFunc = leitor.nextInt();
+                    leitor.nextLine();
+
                     System.out.print("\nNome do funcionário: ");
                     String nomeFuncionario = leitor.nextLine();
 
@@ -121,13 +140,28 @@ public class AccommodoApp {
                     System.out.print("\nTelefone do funcionario: ");
                     String telefoneFuncionario = leitor.nextLine();
 
-                    Funcionario novoFuncionario = new Funcionario(nomeFuncionario,cargoFuncionario,emailFuncionario,salarioFuncionario,telefoneFuncionario);
+                    System.out.print("\nCPF/RG do funcionario: ");
+                    String documentoFuncionario = leitor.nextLine();
 
+                    if (tipoFunc == 1) {
+                        Funcionario novoFuncionario = new Funcionario(nomeFuncionario,emailFuncionario,telefoneFuncionario,documentoFuncionario,cargoFuncionario,salarioFuncionario);
+                        boolean status = hotel1.adicionarFuncionario(novoFuncionario);
+                        if (status) {
+                            System.out.println("Funcionario adicionado com sucesso");
+                        } else {
+                            System.out.println("Não foi possível adicionar o funcionario");
+                        }
+                    }else {
+                        System.out.print("\nDepartamento do funcionario: ");
+                        String departamentoFuncionario = leitor.nextLine();
+                        Gerente novoGerente = new Gerente(nomeFuncionario,emailFuncionario,telefoneFuncionario,documentoFuncionario,cargoFuncionario,salarioFuncionario,departamentoFuncionario);
 
-                    if (hotel1.adicionarFuncionario(novoFuncionario)) {
-                        System.out.println("Funcionario adicionado com sucesso");
-                    } else {
-                        System.out.println("Não foi possivel adicionar o funcionario");
+                        boolean status = hotel1.adicionarFuncionario(novoGerente);
+                        if (status) {
+                            System.out.println("Funcionario adicionado com sucesso");
+                        } else {
+                            System.out.println("Não foi possível adicionar o funcionario");
+                        }
                     }
                     break;
                 case 7:

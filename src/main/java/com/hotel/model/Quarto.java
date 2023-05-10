@@ -1,67 +1,69 @@
 package src.main.java.com.hotel.model;
 
+import src.main.java.com.hotel.enums.StatusQuarto;
+import src.main.java.com.hotel.enums.TiposQuarto;
+
 public class Quarto {
     private String nome;
     private int numero;
     private int andar;
-    private String tipo;
+    private TiposQuarto tipo;
     private int capacidade;
     private double precoDiaria;
-    private boolean disponivel = true;
+    protected StatusQuarto status = StatusQuarto.DISPONIVEL;
 
-    public Quarto(String nome, String tipo, double precoDiaria) {
+    public Quarto() {
+    }
+
+    public Quarto(String nome, int numero, int andar, TiposQuarto tipo, int capacidade, double precoDiaria) {
         this.nome = nome;
+        this.numero = numero;
+        this.andar = andar;
         this.tipo = tipo;
+        this.capacidade = capacidade;
         this.precoDiaria = precoDiaria;
+    }
+
+    public Quarto(String nome, int numero, int andar, TiposQuarto tipo, int capacidade, double precoDiaria, StatusQuarto status) {
+        this.nome = nome;
+        this.numero = numero;
+        this.andar = andar;
+        this.tipo = tipo;
+        this.capacidade = capacidade;
+        this.precoDiaria = precoDiaria;
+        this.status = status;
     }
 
     public String getNome() {
-        return this.nome;
-    }
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public int getAndar() {
-        return this.andar;
-    }
-    public void setAndar(int andar) {
-        this.andar = andar;
+        return nome;
     }
 
     public int getNumero() {
-        return this.numero;
-    }
-    public void setNumero(int numero) {
-        this.numero = numero;
+        return numero;
     }
 
-    public String getTipo() {
-        return this.tipo;
+    public int getAndar() {
+        return andar;
     }
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+
+    public TiposQuarto getTipo() {
+        return tipo;
     }
 
     public int getCapacidade() {
-        return this.capacidade;
-    }
-    public void setCapacidade(int capacidade) {
-        this.capacidade = capacidade;
+        return capacidade;
     }
 
     public double getPrecoDiaria() {
-        return this.precoDiaria;
-    }
-    public void setPrecoDiaria(double precoDiaria) {
-        this.precoDiaria = precoDiaria;
+        return precoDiaria;
     }
 
-    public boolean isDisponivel() {
-        return this.disponivel;
+    public StatusQuarto getStatus() {
+        return status;
     }
-    public void setDisponivel(boolean disponivel) {
-        this.disponivel = disponivel;
+
+    public void setStatus(StatusQuarto status) {
+        this.status = status;
     }
 }
   

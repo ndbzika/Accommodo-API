@@ -1,5 +1,7 @@
 package src.main.java.com.hotel.model;
 
+import src.main.java.com.hotel.enums.StatusQuarto;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
@@ -63,7 +65,7 @@ public class Hotel {
     // criar lógica para comparar datas
     List<Quarto> quartosDisponiveis = new ArrayList<Quarto>();
     for(Quarto quarto : this.quartos) {
-      if (quarto.isDisponivel()) {
+      if (quarto.getStatus() == StatusQuarto.DISPONIVEL) {
         quartosDisponiveis.add(quarto);
       }
     }
@@ -113,7 +115,7 @@ public class Hotel {
     Quarto quartoDaReserva = reserva.getQuarto();
     this.reservas.add(reserva);
     for(Quarto quarto : this.quartos) {
-      if (quarto.equals(quartoDaReserva)) quarto.setDisponivel(false);
+      if (quarto.equals(quartoDaReserva)) quarto.setStatus(StatusQuarto.OCUPADO);
     }
     return true;
   }
@@ -121,7 +123,7 @@ public class Hotel {
     Quarto quartoDaReserva = reserva.getQuarto();
     this.reservas.remove(reserva);
     for(Quarto quarto : this.quartos) {
-      if (quarto.equals(quartoDaReserva)) quarto.setDisponivel(true);
+      if (quarto.equals(quartoDaReserva)) quarto.setStatus(StatusQuarto.DISPONIVEL);
     }
     return true;
   }
