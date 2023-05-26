@@ -1,0 +1,6 @@
+CREATE TABLE HOSPEDE
+(
+    cpf_pessoa CHAR(11) UNIQUE,
+    id SMALLINT PRIMARY KEY,
+    FOREIGN KEY (cpf_pessoa) REFERENCES PESSOA(cpf)
+);

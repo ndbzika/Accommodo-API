@@ -1,0 +1,2 @@
+CREATE UNIQUE INDEX idx_matricula_funcionario ON FUNCIONARIO (matricula);
+ALTER TABLE FUNCIONARIO ADD COLUMN gerente BIGINT;
