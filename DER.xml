@@ -10,7 +10,7 @@
         <Alinhamento_h Valor="60"/>
         <Zoom Valor="100"/>
         <Fonte Estilo="1" Nome="Arial" Tamanho="12"/>
-        <Localizacao Left="0" Top="0"/>
+        <Localizacao Left="36" Top="46"/>
         <Realce Valor="false"/>
     </InfoDiagrama>
     <Entidade ID="4">
@@ -109,7 +109,7 @@
         </Pontos>
     </Ligacao>
     <Entidade ID="16">
-        <Bounds Height="58" Left="758" Top="462" Width="120"/>
+        <Bounds Height="58" Left="760" Top="470" Width="120"/>
         <DisablePainted Valor="false"/>
         <Texto>Gerente</Texto>
         <Observacao/>
@@ -575,9 +575,9 @@
         <Ligacoes PontaA="68" PontaB="16"/>
         <Pontos>
             <Ponto Left="897" Top="499"/>
-            <Ponto Left="886" Top="499"/>
-            <Ponto Left="886" Top="491"/>
-            <Ponto Left="875" Top="491"/>
+            <Ponto Left="887" Top="499"/>
+            <Ponto Left="887" Top="499"/>
+            <Ponto Left="877" Top="499"/>
         </Pontos>
     </Ligacao>
     <Atributo ID="71">
@@ -900,16 +900,16 @@
         <SetaAberta Valor="true"/>
         <SetaLargura Valor="10"/>
         <Inteligente Valor="true"/>
-        <Largura Valor="1"/>
+        <Largura Valor="2"/>
         <Ligacoes PontaA="106" PontaB="16"/>
         <Pontos>
             <Ponto Left="817" Top="442"/>
-            <Ponto Left="817" Top="450"/>
-            <Ponto Left="823" Top="450"/>
-            <Ponto Left="823" Top="458"/>
+            <Ponto Left="817" Top="454"/>
+            <Ponto Left="823" Top="454"/>
+            <Ponto Left="823" Top="466"/>
         </Pontos>
         <Cardinalidade ID="111">
-            <Bounds Height="15" Left="823" Top="449" Width="43"/>
+            <Bounds Height="15" Left="782" Top="447" Width="43"/>
             <DisablePainted Valor="false"/>
             <Texto>Cardinalidade_4</Texto>
             <Observacao/>
@@ -918,7 +918,7 @@
             <Ancorado Valor="false"/>
             <TamanhoAutmatico Valor="true"/>
             <Card Valor="0"/>
-            <MovimentacaoManual Valor="true"/>
+            <MovimentacaoManual Valor="false"/>
             <Papel Valor=""/>
         </Cardinalidade>
     </Ligacao>
