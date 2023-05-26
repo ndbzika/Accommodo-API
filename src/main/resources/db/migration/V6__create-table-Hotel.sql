@@ -1,0 +1,12 @@
+CREATE TABLE HOTEL
+(
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(30) NOT NULL,
+    pais VARCHAR(15) NOT NULL,
+    estado VARCHAR(5) NOT NULL,
+    cidade VARCHAR(20) NOT NULL,
+    rua VARCHAR(30) NOT NULL,
+    numero SMALLINT NOT NULL,
+    cep VARCHAR(10) NOT NULL,
+    estrelas SMALLINT
+);
