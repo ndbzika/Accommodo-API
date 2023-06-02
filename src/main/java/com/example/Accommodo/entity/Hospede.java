@@ -17,19 +17,10 @@ import java.util.Map;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Hospede{
+public class Hospede extends Pessoa{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @Column(name = "nome", nullable = false)
-    protected String nome;
-
-    @Column(name = "telefone", nullable = false)
-    private String telefone;
-
-    @Column(name = "email", nullable = false)
-    private String email;
 
     public Hospede(HospedeRequestDTO data) {
         this.nome = data.nome();

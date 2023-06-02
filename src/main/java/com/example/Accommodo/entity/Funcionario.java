@@ -18,13 +18,10 @@ import java.util.Map;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
-public class Funcionario{
+public class Funcionario extends Pessoa{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @Column(name = "nome", nullable = false)
-    protected String nome;
 
     @Column(name = "cargo")
     private String cargo;
