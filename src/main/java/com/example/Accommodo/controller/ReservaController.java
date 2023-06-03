@@ -32,14 +32,17 @@ public class ReservaController {
     @Autowired
     private ReservaRepository repository;
 
+    @Autowired
     private  FuncionarioRepository funcionarioRepository;
+    @Autowired
     private QuartoRepository quartoRepository;
+    @Autowired
     private HospedeRepository hospedeRepository;
 
     private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
     @PostMapping
-    public ResponseEntity<Map<String, Object>> store(@RequestBody ReservaRequestDTO data) throws ParseException {
+    public ResponseEntity store(@RequestBody ReservaRequestDTO data) throws ParseException {
         Date entryDate = sdf.parse(data.dataInicio());
         Date backDate = sdf.parse(data.dataFim());
 
@@ -66,7 +69,7 @@ public class ReservaController {
 
         repository.save(reserva);
 
-        return ResponseEntity.ok(reserva.JsonFormat());
+        return ResponseEntity.ok(reserva);
     }
 
     @GetMapping
