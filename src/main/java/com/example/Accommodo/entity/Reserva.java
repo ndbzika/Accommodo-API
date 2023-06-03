@@ -7,7 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,34 +33,36 @@ public class Reserva {
     @JoinColumn(name = "quarto_id", referencedColumnName = "id")
     private Quarto quarto;
 
+    @ManyToOne
+    @JoinColumn(name = "id_funcionario", referencedColumnName = "id")
+    private Funcionario funcionario;
+
     @Column(name = "data_inicio", nullable = false)
-    private LocalDate dataInicio;
+    private Date dataInicio;
 
     @Column(name = "data_fim", nullable = false)
-    private LocalDate dataFim;
+    private Date dataFim;
 
     @Column(name = "status")
     private String status;
 
-    @ManyToOne
-    @JoinColumn(name = "funcionario_id")
-    private Funcionario funcionario;
 
-    public Reserva(ReservaRequestDTO data) {
+    public Reserva(ReservaRequestDTO data) throws ParseException {
         this.hospede = data.hospede();
         this.quarto = data.quarto();
-        this.funcionario = data.funcionario();
         this.status = data.status();
-        this.dataInicio = data.dataInicio();
-        this.dataFim = data.dataFim();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        this.dataInicio = sdf.parse(data.dataInicio());
+        this.dataFim = sdf.parse(data.dataFim());
     }
 
     public Map<String,Object> JsonFormat(){
         Map<String,Object>  reservaData = new HashMap<String,Object>();
         reservaData.put("id", this.id);
-        reservaData.put("hospede_id", this.hospede.getId());
-        reservaData.put("quarto_id", this.quarto.getId());
-        reservaData.put("funcionario_id", this.funcionario.getId());
+        reservaData.put("hospede_id", this.hospede);
+        reservaData.put("quarto_id", this.quarto);
+        reservaData.put("id_funcioario", this.funcionario);
         reservaData.put("data_inicio", this.dataInicio);
         reservaData.put("dataFim", this.dataFim);
         reservaData.put("status", this.status);

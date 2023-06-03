@@ -34,9 +34,9 @@ public class FuncionarioController {
     //READ
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping
-    public List<FuncionarioResponseDTO> index() {
+    public ResponseEntity index() {
         List<FuncionarioResponseDTO> funcionarioList = repository.findAll().stream().map(FuncionarioResponseDTO::new).toList();
-        return funcionarioList;
+        return ResponseEntity.ok(funcionarioList);
     }
 
     @CrossOrigin(origins = "*",allowedHeaders = "*")
@@ -62,7 +62,6 @@ public class FuncionarioController {
         funcionario.setCargo(newData.cargo());
         funcionario.setSalario(newData.salario());
 
-        repository.save(funcionario);
 
         return ResponseEntity.ok(funcionario.JsonFormat());
     }

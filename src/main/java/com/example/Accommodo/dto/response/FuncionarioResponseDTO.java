@@ -5,9 +5,9 @@ import com.example.Accommodo.entity.Reserva;
 
 import java.util.List;
 
-public record FuncionarioResponseDTO(Integer id , String nome, String cargo, Double salario,List<Reserva> reservas) {
+public record FuncionarioResponseDTO(Integer id , String nome, String cargo, Double salario) {
     public FuncionarioResponseDTO(Funcionario funcionario) {
-        this(funcionario.getId(), funcionario.getNome(), funcionario.getCargo(),funcionario.getSalario() ,funcionario.getReservas());
+        this(funcionario.getId(), funcionario.getNome(), funcionario.getCargo(),funcionario.getSalario());
     }
 
 }

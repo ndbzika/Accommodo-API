@@ -58,9 +58,6 @@ public class QuartoController {
         Quarto quarto = quartoOptional.get();
         quarto.setNumero(newData.numero());
 
-
-        repository.save(quarto);
-
         return ResponseEntity.ok(quarto.JsonFormat());
     }
 

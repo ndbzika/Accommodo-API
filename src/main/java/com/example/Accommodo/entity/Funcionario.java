@@ -29,18 +29,11 @@ public class Funcionario extends Pessoa{
     @Column(name = "salario", nullable = false)
     private Double salario;
 
-    @OneToMany(mappedBy = "funcionario")
-    private List<Reserva> reservas = new ArrayList<Reserva>();
-
-    public void setReserva(Reserva reserva) {
-        this.reservas.add(reserva);
-    }
-    public void removeReserva(Reserva reserva) {
-        this.reservas.add(reserva);
-    }
 
     public Funcionario(FuncionarioRequestDTO data) {
         this.nome = data.nome();
+        this.email = data.email();
+        this.telefone = data.telefone();
         this.cargo = data.cargo();
         this.salario = data.salario();
     }
