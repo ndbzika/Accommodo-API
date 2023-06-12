@@ -64,6 +64,7 @@ public class HospedeController {
         return ResponseEntity.ok(hospede.JsonFormat());
     }
 
+    @CrossOrigin(origins = "*",allowedHeaders = "*")
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable("id") Integer id) {
         Optional<Hospede> hospedeOptional = repository.findById(id);

@@ -66,6 +66,7 @@ public class FuncionarioController {
         return ResponseEntity.ok(funcionario.JsonFormat());
     }
 
+    @CrossOrigin(origins = "*",allowedHeaders = "*")
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String,Object>> delete(@PathVariable Integer id) {
         Optional<Funcionario> funcionarioOptional = repository.findById(id);

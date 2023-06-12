@@ -41,6 +41,7 @@ public class ReservaController {
 
     private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
+    @CrossOrigin(origins = "*",allowedHeaders = "*")
     @PostMapping
     public ResponseEntity store(@RequestBody ReservaRequestDTO data) throws ParseException {
         Date entryDate = sdf.parse(data.dataInicio());
@@ -72,12 +73,14 @@ public class ReservaController {
         return ResponseEntity.ok(reserva);
     }
 
+    @CrossOrigin(origins = "*",allowedHeaders = "*")
     @GetMapping
     public ResponseEntity index() {
         List<ReservaResponseDTO> reservaList = repository.findAll().stream().map(ReservaResponseDTO::new).toList();
         return ResponseEntity.ok(reservaList);
     }
 
+    @CrossOrigin(origins = "*",allowedHeaders = "*")
     @GetMapping("/{id}")
     public ResponseEntity<Map<String,Object>> show(@PathVariable("id") Integer id) {
         Optional<Reserva> reservaOptional = repository.findById(id);
@@ -89,6 +92,7 @@ public class ReservaController {
         return ResponseEntity.ok(reserva.JsonFormat());
     }
 
+    @CrossOrigin(origins = "*",allowedHeaders = "*")
     @PutMapping("/{id}")
     public ResponseEntity<Map<String,Object>> update(@PathVariable("id") Integer id, @RequestBody ReservaRequestDTO newData) throws ParseException {
         Optional<Reserva> reservaOptional = repository.findById(id);
@@ -106,6 +110,7 @@ public class ReservaController {
         return ResponseEntity.ok(reservaOptional.get().JsonFormat());
     }
 
+    @CrossOrigin(origins = "*",allowedHeaders = "*")
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String,Object>> delete(@PathVariable Integer id) {
         Optional<Reserva> reservaOptional = repository.findById(id);

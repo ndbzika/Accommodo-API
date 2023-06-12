@@ -22,6 +22,7 @@ public class QuartoController {
     @Autowired
     private QuartoRepository repository;
 
+    @CrossOrigin(origins = "*",allowedHeaders = "*")
     @GetMapping
     public List<QuartoResponseDTO> index() {
         List<QuartoResponseDTO> quartoList = repository.findAll().stream().map(QuartoResponseDTO::new).toList();
@@ -57,10 +58,16 @@ public class QuartoController {
 
         Quarto quarto = quartoOptional.get();
         quarto.setNumero(newData.numero());
+        quarto.setTipo(newData.tipo());
+        quarto.setStatus(newData.status());
+        quarto.setPreco(newData.preco());
+
+        repository.save(quarto);
 
         return ResponseEntity.ok(quarto.JsonFormat());
     }
 
+    @CrossOrigin(origins = "*",allowedHeaders = "*")
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String,Object>> delete(@PathVariable Integer id) {
         Optional<Quarto> quartoOptional = repository.findById(id);
