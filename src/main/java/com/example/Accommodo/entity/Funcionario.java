@@ -42,6 +42,8 @@ public class Funcionario extends Pessoa{
         Map<String,Object>  funcionarioData = new HashMap<String,Object>();
         funcionarioData.put("id", this.id);
         funcionarioData.put("nome", this.nome);
+        funcionarioData.put("email", this.email);
+        funcionarioData.put("telefone", this.telefone);
         funcionarioData.put("cargo", this.cargo);
         funcionarioData.put("salario", this.salario);
 

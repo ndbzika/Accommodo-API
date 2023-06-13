@@ -61,7 +61,10 @@ public class FuncionarioController {
         funcionario.setNome(newData.nome());
         funcionario.setCargo(newData.cargo());
         funcionario.setSalario(newData.salario());
+        funcionario.setEmail(newData.email());
+        funcionario.setTelefone(newData.telefone());
 
+        repository.save(funcionario);
 
         return ResponseEntity.ok(funcionario.JsonFormat());
     }
