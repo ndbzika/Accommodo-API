@@ -61,6 +61,8 @@ public class HospedeController {
         hospede.setEmail(newHospedeData.email());
         hospede.setTelefone(newHospedeData.telefone());
 
+        repository.save(hospede);
+
         return ResponseEntity.ok(hospede.JsonFormat());
     }
 

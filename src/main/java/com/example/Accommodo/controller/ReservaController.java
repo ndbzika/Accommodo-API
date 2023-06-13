@@ -107,6 +107,8 @@ public class ReservaController {
         reserva.setDataFim(sdf.parse(newData.dataFim()));
         reserva.setStatus(newData.status());
 
+        repository.save(reserva);
+
         return ResponseEntity.ok(reservaOptional.get().JsonFormat());
     }
 
