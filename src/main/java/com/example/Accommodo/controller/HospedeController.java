@@ -4,10 +4,12 @@ import com.example.Accommodo.dto.request.HospedeRequestDTO;
 import com.example.Accommodo.dto.response.HospedeResponseDTO;
 import com.example.Accommodo.entity.Hospede;
 import com.example.Accommodo.repository.HospedeRepository;
+import com.example.Accommodo.services.HospedeService;
 import netscape.javascript.JSObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -17,64 +19,45 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/hospedes", produces = MediaType.APPLICATION_JSON_VALUE)
+@Validated
+@CrossOrigin(origins = "http://localhost:3000")
 public class HospedeController {
 
     @Autowired
-    private HospedeRepository repository;
+    private HospedeService hospedeService;
 
-    @CrossOrigin(origins = "*",allowedHeaders = "*")
     @PostMapping
     public ResponseEntity<Hospede> store(@RequestBody HospedeRequestDTO data) {
-        Hospede hospede = new Hospede(data);
-        repository.save(hospede);
+        this.hospedeService.create(data);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping
+    public List<HospedeResponseDTO> index() {
+        List<HospedeResponseDTO> hospedesList = hospedeService.findAll().stream().map(HospedeResponseDTO::new).toList();
+        return hospedesList;
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Hospede> show(@PathVariable("id") Integer id) {
+
+        Hospede hospede = this.hospedeService.findById(id);
 
         return ResponseEntity.ok(hospede);
     }
 
-    @CrossOrigin(origins = "*",allowedHeaders = "*")
-    @GetMapping
-    public List<HospedeResponseDTO> index() {
-        List<HospedeResponseDTO> hospedesList = repository.findAll().stream().map(HospedeResponseDTO::new).toList();
-        return hospedesList;
-    }
-
-    @CrossOrigin(origins = "*",allowedHeaders = "*")
-    @GetMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> show(@PathVariable("id") Integer id) {
-        Optional<Hospede> hospedeOptional = repository.findById(id);
-        if (hospedeOptional.isEmpty()) return ResponseEntity.notFound().build();
-
-        Hospede hospede = hospedeOptional.get();
-
-        return ResponseEntity.ok(hospede.JsonFormat());
-    }
-
-    @CrossOrigin(origins = "*",allowedHeaders = "*")
     @PutMapping("/{id}")
-    public ResponseEntity<Map<String,Object>> update(@PathVariable("id") Integer id, @RequestBody HospedeRequestDTO newHospedeData) {
-        Optional<Hospede> hospedeOptional = repository.findById(id);
+    public ResponseEntity<Hospede> update(@PathVariable("id") Integer id, @RequestBody HospedeRequestDTO newHospedeData) {
+        this.hospedeService.update(id,newHospedeData);
 
-        if (hospedeOptional.isEmpty()) return ResponseEntity.notFound().build();
-
-        Hospede hospede = hospedeOptional.get();
-        hospede.setNome(newHospedeData.nome());
-        hospede.setEmail(newHospedeData.email());
-        hospede.setTelefone(newHospedeData.telefone());
-
-        repository.save(hospede);
-
-        return ResponseEntity.ok(hospede.JsonFormat());
+        return ResponseEntity.noContent().build();
     }
 
-    @CrossOrigin(origins = "*",allowedHeaders = "*")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> delete(@PathVariable("id") Integer id) {
-        Optional<Hospede> hospedeOptional = repository.findById(id);
+    public ResponseEntity<Hospede> delete(@PathVariable("id") Integer id) {
+        this.hospedeService.delete(id);
 
-        if (hospedeOptional.isEmpty()) return ResponseEntity.notFound().build();
-
-        repository.deleteById(id);
-
-        return ResponseEntity.ok(hospedeOptional.get().JsonFormat());
+        return ResponseEntity.noContent().build();
     }
 }

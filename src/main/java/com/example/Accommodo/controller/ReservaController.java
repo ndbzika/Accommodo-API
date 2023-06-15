@@ -10,9 +10,11 @@ import com.example.Accommodo.repository.FuncionarioRepository;
 import com.example.Accommodo.repository.HospedeRepository;
 import com.example.Accommodo.repository.QuartoRepository;
 import com.example.Accommodo.repository.ReservaRepository;
+import com.example.Accommodo.services.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.ResourceAccessException;
 
@@ -27,100 +29,44 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "reservas", produces = MediaType.APPLICATION_JSON_VALUE)
+@Validated
+@CrossOrigin(origins = "http://localhost:3000")
 public class ReservaController {
 
     @Autowired
-    private ReservaRepository repository;
+    private ReservaService reservaService;
 
-    @Autowired
-    private  FuncionarioRepository funcionarioRepository;
-    @Autowired
-    private QuartoRepository quartoRepository;
-    @Autowired
-    private HospedeRepository hospedeRepository;
-
-    private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
-    @CrossOrigin(origins = "*",allowedHeaders = "*")
     @PostMapping
-    public ResponseEntity store(@RequestBody ReservaRequestDTO data) throws ParseException {
-        Date entryDate = sdf.parse(data.dataInicio());
-        Date backDate = sdf.parse(data.dataFim());
+    public ResponseEntity<Reserva> store(@RequestBody ReservaRequestDTO data) throws ParseException {
+        this.reservaService.create(data);
 
-        Integer idQuarto = data.quarto().getId();
-        Integer idFuncionario = data.funcionario().getId();
-        Integer idHospede = data.hospede().getId();
+        return ResponseEntity.ok().build();
+    }
 
-        Funcionario funcionario = funcionarioRepository.findById(idFuncionario)
-                .orElseThrow(() -> new ResourceAccessException("Funcionario não encontrado"));
+    @GetMapping
+    public ResponseEntity<List<Reserva>> index() {
+        List<Reserva> reservaList = reservaService.findAll();
+        return ResponseEntity.ok(reservaList);
+    }
 
-        Quarto quarto = quartoRepository.findById(idQuarto)
-                .orElseThrow(() -> new ResourceAccessException("Quarto não encontrado"));
-
-        Hospede hospede = hospedeRepository.findById(idHospede)
-                .orElseThrow(() -> new ResourceAccessException("Hospede não encontrado"));
-
-        if (backDate.before(entryDate)) return ResponseEntity.badRequest().build();
-
-        Reserva reserva = new Reserva(data);
-
-        reserva.setFuncionario(funcionario);
-        reserva.setQuarto(quarto);
-        reserva.setHospede(hospede);
-
-        repository.save(reserva);
+    @GetMapping("/{id}")
+    public ResponseEntity<Reserva> show(@PathVariable("id") Integer id) {
+        Reserva reserva = this.reservaService.findById(id);
 
         return ResponseEntity.ok(reserva);
     }
 
-    @CrossOrigin(origins = "*",allowedHeaders = "*")
-    @GetMapping
-    public ResponseEntity index() {
-        List<ReservaResponseDTO> reservaList = repository.findAll().stream().map(ReservaResponseDTO::new).toList();
-        return ResponseEntity.ok(reservaList);
-    }
-
-    @CrossOrigin(origins = "*",allowedHeaders = "*")
-    @GetMapping("/{id}")
-    public ResponseEntity<Map<String,Object>> show(@PathVariable("id") Integer id) {
-        Optional<Reserva> reservaOptional = repository.findById(id);
-
-        if (reservaOptional.isEmpty()) return ResponseEntity.notFound().build();
-
-        Reserva reserva = reservaOptional.get();
-
-        return ResponseEntity.ok(reserva.JsonFormat());
-    }
-
-    @CrossOrigin(origins = "*",allowedHeaders = "*")
     @PutMapping("/{id}")
-    public ResponseEntity<Map<String,Object>> update(@PathVariable("id") Integer id, @RequestBody ReservaRequestDTO newData) throws ParseException {
-        Optional<Reserva> reservaOptional = repository.findById(id);
+    public ResponseEntity<Reserva> update(@PathVariable("id") Integer id, @RequestBody ReservaRequestDTO newData) throws ParseException {
+        this.reservaService.update(id, newData);
 
-        if (reservaOptional.isEmpty()) return  ResponseEntity.notFound().build();
-
-        Reserva reserva = reservaOptional.get();
-        reserva.setHospede(newData.hospede());
-        reserva.setQuarto(newData.quarto());
-        reserva.setFuncionario(newData.funcionario());
-        reserva.setDataInicio(sdf.parse(newData.dataInicio()));
-        reserva.setDataFim(sdf.parse(newData.dataFim()));
-        reserva.setStatus(newData.status());
-
-        repository.save(reserva);
-
-        return ResponseEntity.ok(reservaOptional.get().JsonFormat());
+        return ResponseEntity.noContent().build();
     }
 
-    @CrossOrigin(origins = "*",allowedHeaders = "*")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Map<String,Object>> delete(@PathVariable Integer id) {
-        Optional<Reserva> reservaOptional = repository.findById(id);
+    public ResponseEntity<Reserva> delete(@PathVariable Integer id) {
+        this.reservaService.delete(id);
 
-        if (reservaOptional.isEmpty()) return ResponseEntity.notFound().build();
-
-        repository.deleteById(id);
-
-        return ResponseEntity.ok(reservaOptional.get().JsonFormat());
+        return ResponseEntity.ok().build();
     }
 }
