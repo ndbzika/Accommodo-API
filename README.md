@@ -31,7 +31,7 @@ A utilização da abordagem de Orientação a Objetos traz benefícios significa
 
 ### Diagrama de classes
 
-![Diagrama de classes Accommodo](/home/prego7k/projects/Accommodo/accommodo.png "Diagrama de classes")
+![Diagrama de classes Accommodo](/accommodo.png "Diagrama de classes")
 
 
 ## Rotas da API
