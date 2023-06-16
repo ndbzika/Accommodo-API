@@ -20,7 +20,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = "/hospedes", produces = MediaType.APPLICATION_JSON_VALUE)
 @Validated
-@CrossOrigin(origins = "https://accommodo-frontend-production.up.railway.app")
+@CrossOrigin(origins = "https://accommodo-frontend-production.up.railway.app", allowedHeaders = "*")
 public class HospedeController {
 
     @Autowired

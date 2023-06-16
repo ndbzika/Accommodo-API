@@ -22,7 +22,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = "/quartos", produces = MediaType.APPLICATION_JSON_VALUE)
 @Validated
-@CrossOrigin(origins = "https://accommodo-frontend-production.up.railway.app")
+@CrossOrigin(origins = "https://accommodo-frontend-production.up.railway.app", allowedHeaders = "*")
 public class QuartoController {
 
     @Autowired
