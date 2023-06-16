@@ -30,7 +30,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = "reservas", produces = MediaType.APPLICATION_JSON_VALUE)
 @Validated
-@CrossOrigin(origins = "https://accommodo-frontend-production.up.railway.app/")
+@CrossOrigin(origins = "https://accommodo-frontend-production.up.railway.app")
 public class ReservaController {
 
     @Autowired
@@ -39,7 +39,6 @@ public class ReservaController {
     @PostMapping
     public ResponseEntity<Reserva> store(@RequestBody ReservaRequestDTO data) throws ParseException {
         this.reservaService.create(data);
-
         return ResponseEntity.ok().build();
     }
 
@@ -52,21 +51,18 @@ public class ReservaController {
     @GetMapping("/{id}")
     public ResponseEntity<Reserva> show(@PathVariable("id") Integer id) {
         Reserva reserva = this.reservaService.findById(id);
-
         return ResponseEntity.ok(reserva);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Reserva> update(@PathVariable("id") Integer id, @RequestBody ReservaRequestDTO newData) throws ParseException {
         this.reservaService.update(id, newData);
-
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Reserva> delete(@PathVariable Integer id) {
         this.reservaService.delete(id);
-
         return ResponseEntity.ok().build();
     }
 }

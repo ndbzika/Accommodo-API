@@ -22,7 +22,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = "/quartos", produces = MediaType.APPLICATION_JSON_VALUE)
 @Validated
-@CrossOrigin(origins = "https://accommodo-frontend-production.up.railway.app/")
+@CrossOrigin(origins = "https://accommodo-frontend-production.up.railway.app")
 public class QuartoController {
 
     @Autowired
@@ -37,28 +37,24 @@ public class QuartoController {
     @GetMapping("/{id}")
     public ResponseEntity<Quarto> show(@PathVariable("id") Integer id) {
         Quarto quarto = this.quartoService.findById(id);
-
         return ResponseEntity.ok().body(quarto);
     }
 
     @PostMapping
     public ResponseEntity<Void> store(@RequestBody QuartoRequestDTO data) {
         this.quartoService.create(data);
-
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@PathVariable("id") Integer id, @RequestBody QuartoRequestDTO newData) {
         this.quartoService.update(id, newData);
-
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String,Object>> delete(@PathVariable Integer id) {
         this.quartoService.delete(id);
-
         return ResponseEntity.ok().build();
     }
 }

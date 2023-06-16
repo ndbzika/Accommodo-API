@@ -20,7 +20,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = "/hospedes", produces = MediaType.APPLICATION_JSON_VALUE)
 @Validated
-@CrossOrigin(origins = "https://accommodo-frontend-production.up.railway.app/")
+@CrossOrigin(origins = "https://accommodo-frontend-production.up.railway.app")
 public class HospedeController {
 
     @Autowired
@@ -29,7 +29,6 @@ public class HospedeController {
     @PostMapping
     public ResponseEntity<Hospede> store(@RequestBody HospedeRequestDTO data) {
         this.hospedeService.create(data);
-
         return ResponseEntity.ok().build();
     }
 
@@ -41,23 +40,19 @@ public class HospedeController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Hospede> show(@PathVariable("id") Integer id) {
-
         Hospede hospede = this.hospedeService.findById(id);
-
         return ResponseEntity.ok(hospede);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Hospede> update(@PathVariable("id") Integer id, @RequestBody HospedeRequestDTO newHospedeData) {
         this.hospedeService.update(id,newHospedeData);
-
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Hospede> delete(@PathVariable("id") Integer id) {
         this.hospedeService.delete(id);
-
         return ResponseEntity.noContent().build();
     }
 }

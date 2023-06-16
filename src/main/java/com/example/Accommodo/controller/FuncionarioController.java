@@ -19,7 +19,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = "funcionarios", produces = MediaType.APPLICATION_JSON_VALUE)
 @Validated
-@CrossOrigin(origins = "https://accommodo-frontend-production.up.railway.app/")
+@CrossOrigin(origins = "https://accommodo-frontend-production.up.railway.app")
 public class FuncionarioController {
 
     @Autowired
@@ -29,7 +29,6 @@ public class FuncionarioController {
     @PostMapping
     public ResponseEntity<Funcionario> store(@RequestBody FuncionarioRequestDTO data) {
         this.funcionarioService.create(data);
-
         return ResponseEntity.ok().build();
     }
 
@@ -43,21 +42,18 @@ public class FuncionarioController {
     @GetMapping("/{id}")
     public ResponseEntity<Funcionario> show(@PathVariable("id") Integer id) {
         Funcionario funcionario = this.funcionarioService.findById(id);
-
         return ResponseEntity.ok(funcionario);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Map<String,Object>> update(@PathVariable("id") Integer id, @RequestBody FuncionarioRequestDTO newData) {
         this.funcionarioService.update(id, newData);
-
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String,Object>> delete(@PathVariable Integer id) {
         this.funcionarioService.delete(id);
-
         return ResponseEntity.ok().build();
     }
 }
