@@ -20,13 +20,17 @@ public class QuartoService {
     public Quarto findById(Integer id) {
         Optional<Quarto> quarto = this.repository.findById(id);
 
+        if (id.equals(null)) {
+            System.out.println("Id não existe!");
+        }
+
         return quarto.orElseThrow(() -> new RuntimeException(
                 "Quarto não encontrado! ID: " + id + ", Tipo: " + Quarto.class.getName()
         ));
     }
 
-    public List<Quarto> findAll() {
-        List<Quarto> quartos = this.repository.findAll();
+    public ArrayList<Quarto> findAll() {
+        ArrayList<Quarto> quartos = (ArrayList<Quarto>) this.repository.findAll();
         return quartos;
     }
 
@@ -44,6 +48,25 @@ public class QuartoService {
         newData.setTipo(data.tipo());
         newData.setStatus(data.status());
         newData.setPreco(data.preco());
+
+        for (int i = newData.getNumero(); i == data.numero() - 1; i++) {
+            System.out.println("NUMERO DO QUARTO " + data.numero());
+        }
+
+        switch (data.status()) {
+            case "Manutenção": {
+                System.out.println("Quarto " + id + " em manutenção!");
+                break;
+            }
+            case "Disponível": {
+                System.out.println("Quarto " + id + " disponível!");
+                break;
+            }
+            case "Ocupado": {
+                System.out.println("Quarto " + id + " ocupado!");
+                break;
+            }
+        }
 
         return this.repository.save(newData);
     }
