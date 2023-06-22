@@ -27,11 +27,10 @@ public class ReservaService {
     @Autowired
     private HospedeService hospedeService;
 
-    private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
     public Reserva findById(Integer id) {
         Optional<Reserva> reserva = this.reservarRepository.findById(id);
-
         return reserva.orElseThrow(() -> new RuntimeException(
                 "Reserva não encontrada! ID: " + id + ", Tipo: " + Reserva.class.getName()
         ));
