@@ -82,20 +82,23 @@ Aqui estão alguns exemplos de solicitações e respostas para ilustrar o uso da
 ### Exemplo de solicitação GET /hospedes/1
 GET /hospedes/1
 
-### Exemplo de resposta GET /hospedes/1
+#### Exemplo de resposta GET /hospedes/1
 Status: 200 OK
+```JSON
 {
 "id": 1,
 "nome": "Flavio Henrique",
 "email": "flavio@email.com",
-"telefone": "(12) 3456-7890",
+"telefone": "(12) 3456-7890"
 }
+```
 
 ### Exemplo de solicitação GET /funcionarios/1
 GET /funcionarios/1
 
-### Exemplo de resposta GET /funcionarios/1
+#### Exemplo de resposta GET /funcionarios/1
 Status: 200 OK
+```JSON
 {
 "nome": "Joao Humberto",
 "email": "joao@email.com",
@@ -104,12 +107,14 @@ Status: 200 OK
 "cargo": "Gerente",
 "salario": 3000.0
 }
+```
 
 ### Exemplo de solicitação GET /quartos/1
 GET /quartos/1
 
-### Exemplo de resposta GET /quartos/1
+#### Exemplo de resposta GET /quartos/1
 Status: 200 OK
+```JSON
 {
 "id": 1,
 "numero": 1,
@@ -117,12 +122,13 @@ Status: 200 OK
 "preco": 3000.0,
 "status": "Manutenção"
 }
-
+```
 ### Exemplo de solicitação GET /reservas/1
 GET /reservas/1
 
-### Exemplo de resposta GET /reservas/1
+#### Exemplo de resposta GET /reservas/1
 Status: 200 OK
+```JSON
 {
 "id": 1,
 "hospede": {
@@ -150,6 +156,7 @@ Status: 200 OK
 "dataFim": "2023-06-25T03:00:00.000+00:00",
 "status": "ativo"
 }
+```
 
 ## Notas Adicionais
 - Esta documentação foi atualizada pela última vez em 15 de junho de 2023.
