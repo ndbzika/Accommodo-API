@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,8 +29,7 @@ public class QuartoService {
     }
 
     public ArrayList<Quarto> findAll() {
-        ArrayList<Quarto> quartos = (ArrayList<Quarto>) this.repository.findAll();
-        return quartos;
+        return (ArrayList<Quarto>) this.repository.findAll();
     }
 
     @Transactional
@@ -54,17 +52,14 @@ public class QuartoService {
         }
 
         switch (data.status()) {
-            case "Manutenção": {
+            case "Manutenção" -> {
                 System.out.println("Quarto " + id + " em manutenção!");
-                break;
             }
-            case "Disponível": {
+            case "Disponível" -> {
                 System.out.println("Quarto " + id + " disponível!");
-                break;
             }
-            case "Ocupado": {
+            case "Ocupado" -> {
                 System.out.println("Quarto " + id + " ocupado!");
-                break;
             }
         }
 
