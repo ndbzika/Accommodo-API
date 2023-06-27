@@ -79,4 +79,12 @@ public class QuartoService {
             throw new RuntimeException("Quarto não existe!");
         }
     }
+
+    public void delete(Quarto quarto) {
+        try {
+            this.repository.delete(quarto);
+        } catch(Exception e) {
+            throw new RuntimeException("Quarto não existe!");
+        }
+    }
 }
