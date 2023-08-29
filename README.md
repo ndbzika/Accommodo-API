@@ -7,6 +7,7 @@ O projeto "accommodo" é um sistema de gerenciamento de hotéis que permite real
 tarefas relacionadas à administração e operação de um hotel, como reserva de quartos, gerenciamento 
 de hóspedes, controle de ocupação e registro de serviços. Descreveremos as principais funcionalidades, 
 estrutura de pastas, API e outros aspectos relevantes.
+Você pode ver o front-end dessa aplicação aqui: https://github.com/ndbzika/accommodo-frontend
 
 ### Tecnologias Utilizadas
 
